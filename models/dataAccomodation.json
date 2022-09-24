@@ -1,0 +1,38 @@
+[
+  {
+    "id": "1234",
+    "name": "Room",
+    "description": "Nice and cozy",
+    "city": "Bansko",
+    "beds": 2,
+    "price": 130,
+    "imgUrl": "/static/assets/room1.jpg"
+  },
+  {
+    "id": "1235",
+    "name": "Residential",
+    "description": "Lux Apartment",
+    "city": "Sofia",
+    "beds": 3,
+    "price": 160,
+    "imgUrl": "/static/assets/room2.jpg"
+  },
+  {
+    "id": "1236",
+    "name": "Camp",
+    "description": "Outdoor sweet and rest",
+    "city": "Pirin",
+    "beds": 3,
+    "price": 80,
+    "imgUrl": "/static/assets/room3.jpg"
+  },
+  {
+    "id": "0292fd",
+    "name": "5 star hotel",
+    "description": "sfafas",
+    "city": "Plovdiv",
+    "price": 200,
+    "beds": 4,
+    "imageUrl": "fdasfa"
+  }
+]
