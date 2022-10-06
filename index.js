@@ -1,31 +1,16 @@
 const express = require("express");
-const hbs = require("express-handlebars").create({
-    extname: ".hbs"
-});
+const expressConfig = require('./config/express');
+const routerConfig = require('./config/routes');
+const databaseConfig = require('./config/database');
+const Facility = require("./models/Facility");
 
-const homeController = require('./controllers/homeController');
-const catalogController = require('./controllers/catalogController');
-const createController = require('./controllers/createController');
-const defaultController = require("./controllers/defaultController");
-const defaultTitle = require('./middlewares/defaultTitle');
+async function start() {
+    const app = express();
+    
+    await databaseConfig(app);
+    expressConfig(app);
+    routerConfig(app);
+    app.listen(3000 , () => console.log("Everything is good"));
+}
 
-const app = express();
-
-
-app.engine('.hbs' , hbs.engine);
-app.set('view engine' ,  '.hbs');
-
-app.use(express.urlencoded({extended: true}));
-
-app.use('/static' , express.static('static'));
-
-app.use(defaultTitle("SoftUni Accomodation"));
-
-app.use(homeController);
-app.use('/catalog' , catalogController);
-app.use('/catalog/:id' , catalogController);
-app.use('/create' , createController);
-
-app.all("*" , defaultController);
-
-app.listen(3000 , () => console.log("Everything is good"));
+start(); 

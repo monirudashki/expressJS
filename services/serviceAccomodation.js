@@ -1,43 +1,21 @@
-const fs = require("fs");
-
-const fileName = './models/dataAccomodation.json';
-
-const data = JSON.parse(fs.readFileSync(fileName));
-
-async function persist() {
-    return new Promise((res, rej) => {
-        fs.writeFile(fileName, JSON.stringify(data, null, 2), (err) => {
-            if (err == null) {
-                res();
-            } else {
-                rej(err);
-            }
-        });
-    });
-};
+const Accomodation = require('../models/Accomodation');
 
 function getAll(search , city , fromPrice , toPrice) {
-    search = search.toLowerCase();
-
-    return data
-        .filter(r => r.name.toLowerCase().includes(search) || r.description.toLowerCase().includes(search))
-        .filter(r => r.city.toLowerCase().includes(city.toLowerCase()))
-        .filter(r => r.price >= fromPrice && r.price <= toPrice);
+     return Accomodation.find({}).lean();
 };
 
 function getById(id) {
-    return data.find(el => el.id == id);
+    return Accomodation.findById(id).lean();
 }
 
 async function create(roomData) {
     const room = {
-        id: getId(),
         name: roomData.name,
         description: roomData.description,
         city: roomData.city,
         price: Number(roomData.price),
         beds: Number(roomData.beds),
-        imageUrl: roomData.imageUrl
+        imgUrl: roomData.imgUrl
     }
 
     let missingFields = Object.entries(room).filter(([k , v]) => !v);
@@ -46,14 +24,9 @@ async function create(roomData) {
         throw new Error(missingFields.map(m => `${m[0]} is required!`).join('\n'));
     }
 
-    data.push(room);
-    await persist();
+    const result = await Accomodation.create(room);
 
-    return room;
-}
-
-function getId() {
-    return ('000000' + (Math.random() * 999999 | 0).toString(16)).slice(-6);
+    return result;
 }
 
 module.exports = {
