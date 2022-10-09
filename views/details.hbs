@@ -22,11 +22,17 @@
                         Price per night: <strong>{{price}}€</strong>
                     </div>
                 </div>
+                {{#if isOwner}}
                 <a class="action" href='/facility/{{_id}}/decorateRoom'>Decorate Room</a>
-            </div>
-        </main>
+                <a class="action" href='/room/{{_id}}/edit'>Edit</a>
+                <a class="action" style="background-color: Red;" href='/room/{{_id}}/delete'>Delete</a>
+                {{/if}}
+                </div>
 
-        <footer>Listed by (TODO add owner)</footer>
+        </main>
+        {{#if ownerName}}
+        <footer>Listed by {{ownerName}}</footer>
+        {{/if}}
     </div>
     {{/with}}
 </section>

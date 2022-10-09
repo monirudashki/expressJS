@@ -1,0 +1,38 @@
+<section id="delete-section" class="">
+
+    <h1 class="item">Delete Accomodation</h1>
+
+    <main class="item padded align-center">
+
+        <form class="layout left large" method="post" action="/room/{{room._id}}/delete">
+            {{#if error}}
+            <div class="error-box">
+                {{#each error}}
+                <p>{{this}}</p>
+                {{/each}}
+            </div>
+            {{/if}}
+            <div class="col aligned">
+                <label><span>Name</span><input type="text" name="name" value={{room.name}} disabled></label>
+                <label><span>City</span><input type="text" name="city" value={{room.city}} disabled></label>
+                <label><span>Beds</span><input type="number" name="beds" value={{room.beds}} disabled></label>
+                <label><span>Price per night</span><input type="number" name="price" value={{room.price}} disabled></label>
+                <label><span>Image URL</span><input type="text" name="imgUrl" value={{room.imgUrl}} disabled></label>
+            </div>
+
+            <div class="content pad-med align-center vertical">
+                <label>
+                    <span>Description</span>
+                    <textarea name="description" disabled>{{room.description}}</textarea>
+                </label>
+
+                <div class="align-center">
+                    <input class="action" type="submit" value="Confirm Delete">
+                </div>
+            </div>
+
+        </form>
+
+    </main>
+
+</section>

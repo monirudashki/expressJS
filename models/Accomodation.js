@@ -8,6 +8,7 @@ const accomodationSchema = new Schema({
   price: { type: Number, required: true },
   imgUrl: { type: String , required: true },
   facilities: { type: [Types.ObjectId], default: [], ref: 'Facility' },
+  owner: { type: Types.ObjectId, ref: 'User', required: true }
 });
 
 const Accomodation = model("Accomodation" , accomodationSchema);
